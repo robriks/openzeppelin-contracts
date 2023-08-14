@@ -11,11 +11,25 @@
 [[install]]
 === Installation
 
+==== Hardhat, Truffle (npm)
+
 ```console
 $ npm install @openzeppelin/contracts
 ```
 
-OpenZeppelin Contracts features a xref:releases-stability.adoc#api-stability[stable API], which means your contracts won't break unexpectedly when upgrading to a newer minor version.
+OpenZeppelin Contracts features a xref:releases-stability.adoc#api-stability[stable API], which means that your contracts won't break unexpectedly when upgrading to a newer minor version.
+
+==== Foundry (git)
+
+WARNING: When installing via git, it is a common error to use the `master` branch. This is a development branch that should be avoided in favor of tagged releases. The release process involves security measures that the `master` branch does not guarantee.
+
+WARNING: Foundry installs the latest version initially, but subsequent `forge update` commands will use the `master` branch.
+
+```console
+$ forge install OpenZeppelin/openzeppelin-contracts
+```
+
+Add `@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/` in `remappings.txt.` 
 
 [[usage]]
 === Usage
@@ -26,9 +40,9 @@ Once installed, you can use the contracts in the library by importing them:
 ----
 // contracts/MyNFT.sol
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract MyNFT is ERC721 {
     constructor() ERC721("MyNFT", "MNFT") {
@@ -39,6 +53,13 @@ contract MyNFT is ERC721 {
 TIP: If you're new to smart contract development, head to xref:learn::developing-smart-contracts.adoc[Developing Smart Contracts] to learn about creating a new project and compiling your contracts.
 
 To keep your system secure, you should **always** use the installed code as-is, and neither copy-paste it from online sources, nor modify it yourself. The library is designed so that only the contracts and functions you use are deployed, so you don't need to worry about it needlessly increasing gas costs.
+
+[[security]]
+== Security
+
+Please report any security issues you find via our https://www.immunefi.com/bounty/openzeppelin[bug bounty program on Immunefi] or directly to security@openzeppelin.org.
+
+The https://contracts.openzeppelin.com/security[Security Center] contains more details about the secure development process.
 
 [[next-steps]]
 == Learn More
